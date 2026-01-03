@@ -22,6 +22,8 @@ const CreateTicket: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
+    const [evidenceFile, setEvidenceFile] = useState<File | null>(null);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         setError(null);
@@ -36,16 +38,24 @@ const CreateTicket: React.FC = () => {
             return;
         }
 
+        // Simulate Image Upload
+        let evidenceUrl = undefined;
+        if (evidenceFile) {
+            evidenceUrl = URL.createObjectURL(evidenceFile);
+        }
+
         // Add ticket
         addTicket({
             issue: formData.issue,
             category: formData.category,
             description: formData.description,
             teacherName: user?.name || "Unknown Teacher",
+            image: evidenceUrl
         });
 
         setSuccess(true);
         setFormData({ issue: "", category: "", description: "" });
+        setEvidenceFile(null);
 
         // Hide success message after 3 seconds and redirect
         setTimeout(() => {
@@ -134,7 +144,12 @@ const CreateTicket: React.FC = () => {
                         {/* File Upload */}
                         <div>
                             <Label>Attach Image/Video (Optional)</Label>
-                            <FileInput />
+                            <input
+                                type="file"
+                                accept="image/*,video/*"
+                                onChange={(e) => setEvidenceFile(e.target.files?.[0] || null)}
+                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 dark:file:bg-brand-900/30 dark:file:text-brand-400"
+                            />
                         </div>
 
                         {/* Submit Button */}

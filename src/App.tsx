@@ -69,6 +69,7 @@ export default function App() {
 
                 <Route element={<ProtectedRoute allowedRoles={['maintenance']} />}>
                   <Route path="/maintenance" element={<MaintenanceDashboard />} />
+                  <Route path="/maintenance/ticket/:id" element={<TicketDetail />} />
                 </Route>
 
                 {/* Common Pages */}

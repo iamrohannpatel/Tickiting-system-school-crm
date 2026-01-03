@@ -11,7 +11,7 @@ export default function AdminProfile() {
                 name="Dr. Eleanor Vance"
                 role="Principal"
                 location="The Academy Campus, Main Hall"
-                image="/images/user/user-01.jpg"
+                image="/images/user/owner.jpg"
             />
             <UserInfoCard
                 firstName="Eleanor"

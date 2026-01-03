@@ -10,7 +10,7 @@ export default function TeacherProfile() {
                 name="Prof. Sarah Thompson"
                 role="Senior Physics Instructor"
                 location="The Academy, Science Wing"
-                image="/images/user/user-02.jpg"
+                image="/images/user/user-01.jpg"
             />
             <UserInfoCard
                 firstName="Sarah"

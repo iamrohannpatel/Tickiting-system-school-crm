@@ -2,9 +2,11 @@ import { useState } from "react";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { Link } from "react-router";
+import { useAuth } from "../../context/AuthContext";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -13,6 +15,42 @@ export default function UserDropdown() {
   function closeDropdown() {
     setIsOpen(false);
   }
+
+  const getUserDetails = () => {
+    switch (user?.role) {
+      case "admin":
+        return {
+          name: "Dr. Eleanor Vance",
+          role: "Principal",
+          email: "principal.vance@theacademy.edu",
+          image: "/images/user/owner.jpg" // Using existing image for now
+        };
+      case "teacher":
+        return {
+          name: "Prof. Sarah Thompson",
+          role: "Senior Physics Instructor",
+          email: "s.thompson@theacademy.edu",
+          image: "/images/user/user-01.jpg" // or another placeholder
+        };
+      case "maintenance":
+        return {
+          name: "Mr. Mike Builder",
+          role: "Head Groundskeeper",
+          email: "facilities@theacademy.edu",
+          image: "/images/user/user-02.jpg" // or another placeholder
+        };
+      default:
+        return {
+          name: "Guest User",
+          role: "Visitor",
+          email: "guest@theacademy.edu",
+          image: "/images/user/owner.jpg"
+        };
+    }
+  };
+
+  const userInfo = getUserDetails();
+
   return (
     <div className="relative">
       <button
@@ -20,14 +58,13 @@ export default function UserDropdown() {
         className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
       >
         <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          <img src="/images/user/owner.jpg" alt="User" />
+          <img src={userInfo.image} alt="User" />
         </span>
 
-        <span className="block mr-1 font-medium text-theme-sm">Musharof</span>
+        <span className="block mr-1 font-medium text-theme-sm">{userInfo.name}</span>
         <svg
-          className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
           width="18"
           height="20"
           viewBox="0 0 18 20"
@@ -51,10 +88,13 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            Musharof Chowdhury
+            {userInfo.name}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+            {userInfo.email}
+          </span>
+          <span className="mt-0.5 block text-theme-xs text-gray-400 dark:text-gray-500">
+            {userInfo.role}
           </span>
         </div>
 

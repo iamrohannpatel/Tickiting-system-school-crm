@@ -146,6 +146,16 @@ const TicketDetail: React.FC = () => {
                                 Reopen Ticket
                             </Button>
                         )}
+                        {isAdmin && ticket.status === 'Pending' && (
+                            <div className="flex gap-2">
+                                <Button onClick={() => { updateTicketStatus(ticket.id, 'Approved'); toast.success("Ticket Approved"); }} className="bg-success-600 hover:bg-success-700 text-white">
+                                    Approve
+                                </Button>
+                                <Button onClick={() => { updateTicketStatus(ticket.id, 'Rejected'); toast.error("Ticket Rejected"); }} className="bg-error-600 hover:bg-error-700 text-white">
+                                    Reject
+                                </Button>
+                            </div>
+                        )}
                     </div>
 
                     <div className="pt-6 mt-6 border-t border-gray-100 dark:border-gray-700">

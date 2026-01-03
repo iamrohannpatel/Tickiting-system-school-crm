@@ -9,7 +9,7 @@ export default function MaintenanceProfile() {
                 name="Mr. Mike Builder"
                 role="Head Groundskeeper"
                 location="The Academy, Maintenance Shed"
-                image="/images/user/user-03.jpg"
+                image="/images/user/user-02.jpg"
             />
             <UserInfoCard
                 firstName="Mike"
